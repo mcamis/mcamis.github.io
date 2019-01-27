@@ -1,659 +1,133 @@
-/*
-
-░░░░░░░░░▄░░░░░░░░░░░░░░▄░░░░
-░░░░░░░░▌▒█░░░░░░░░░░░▄▀▒▌░░░
-░░░░░░░░▌▒▒█░░░░░░░░▄▀▒▒▒▐░░░
-░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐░░░
-░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐░░░
-░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌░░░ 
-░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒▌░░
-░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐░░
-░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄▌░
-░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▌░
-▀▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒▐░
-▐▒▒▐▀▐▀▒░▄▄▒▄▒▒▒▒▒▒░▒░▒░▒▒▒▒▌
-▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒▒▒░▒░▒░▒▒▐░
-░▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒░▒░▒░▒░▒▒▒▌░
-░▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▒▄▒▒▐░░
-░░▀▄▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▄▒▒▒▒▌░░
-░░░░▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀░░░
-░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀░░░░░
-░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀░░░░░░░░
-
-wow
-so cascade 
-much style 
-very selectors
-
-Currently designing this site ~ * IN THE BROWSER * ~
-so there's a lot of cruft going on in this file
-TODO: Make this file not terrible
-
-*/
-
-
-/* 
-Base Structure, Colors & Typography 
-*/
-
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
-    text-rendering: optimizelegibility;
-    -webkit-font-smoothing: antialiased;
 }
-
 html {
     background-color: #f8f5ef;
     height: 100%;
 }
-
 body {
-    font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    line-height: 145%;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
     color: #333;
     position: relative;
     margin: 0 auto;
 }
-
-h1,
-h2,
-h3 {
-    font-size: 25.2px;
-    font-weight: 400;
-    line-height: 140%;
-    width: 100%;
+h1, h2, h3 {
+    font-size: 15px;
 }
-
-h2 {
-    margin-bottom: .5rem;
-}
-
-h3 {
-    font-size: 18px;
-    line-height: 1.4;
-    margin-bottom: 2rem;
-}
-
 p {
-    font-size: 18px;
-    margin-top: 0;
-    line-height: 150%;
-    margin-bottom: 1em;
+    max-width: 70ch;
 }
-
+p:nth-child(4) {
+    margin-bottom: 3em;
+}
 a {
     color: #428bca;
-    text-decoration: none;
-    display: inline-block;
+    transition: all 900ms cubic-bezier(0.55, 0.085, 0.68, 0.53);
 }
-
-a:hover,
-a:focus {
+a:hover, a:focus {
     color: #e50a5b;
+    transition: all 100ms ease;
 }
-
-a.disabled {
-    opacity: .25 !important;
-    text-indent: -9999px;
-    pointer-events: none;
-}
-
 img {
     width: 100%;
     height: auto;
 }
-
 ul {
     list-style-type: none;
-    margin-top: 1.5rem;
+    padding-left: 0;
+    margin-bottom: 3em;
 }
-
-li {
+li span {
+    width: 150px;
     display: inline-block;
-    font-size: 90%;
-    background-color: rgba(255, 255, 255, .5);
-    padding: 0 .35rem;
-    border-radius: .25rem;
-    margin-bottom: 6px;
 }
-
-.btn {
-    background: white;
-    border-radius: .25rem;
-    padding: .5rem 1rem;
-    font-size: 18px;
-    display: inline-block;
-    margin: 1em 0 0;
-}
-
-.text-center {
-    text-align: center;
-    ;
-}
-
-.p-b-0 {
-    padding-bottom: 0 !important;
-}
-
-
-/* 
-
-Intro Page Specifics
-
-*/
-
-.home h3:nth-child(1) {
-    padding-top: 1em;
-    margin-left: .5rem;
-}
-
-.home h2 {
-    margin-bottom: 1.5rem;
-    margin-left: .5rem;
-    font-size: 18px;
-    /*border-bottom: 1px solid gray;*/
-}
-
-.home h3 {
-    margin-top: .5rem;
-}
-
-.home p {
-    padding: .5rem;
-    padding-bottom: 2rem;
-}
-
 .intro {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
     width: 100%;
-    padding: 4em 2rem 6em;
+    padding: 4em 2rem 0;
     background-image: url('../images/geometry.png');
     background-repeat: repeat;
-    -webkit-animation-name: press-start;
-    -webkit-animation-duration: 50s;
-    -webkit-animation-timing-function: ease-out;
-    -webkit-animation-iteration-count: infinite;
     animation-name: press-start;
     animation-duration: 50s;
     animation-timing-function: ease-out;
     animation-iteration-count: infinite;
-    /* Dumb rules, trying to figure out how to ease the CPU utilization in Chrome */
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    backface-visibility: hidden;
-    perspective: 1000;
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
-
-.home article a {
-    display: block;
-}
-
-.intro a {
-    color: white;
-}
-
-.intro h1 {
-    max-width: 18em;
-}
-
 .intro-container {
     width: 100%;
     height: 100%;
 }
-
-.intro-logo {
-    position: absolute;
-    top: 0;
-    left: 1rem;
-    z-index: 99;
-}
-
-.logo {
-    width: 2.75em;
-    height: 2.75em;
-    margin: .75rem 1.5rem .75rem .5rem;
-    display: inline-block;
-    transition: all ease 150ms;
-    border-radius: 50px;
-}
-
-.logo-dark path {
-    fill: #333;
-}
-
-.logo:hover path:nth-child(1) {
-    transition: all ease 150ms;
-}
-
-.logo:hover path:nth-child(1) {
-    fill: #fdc700;
-}
-
-.logo-dark:hover {
-    background-color: #2b2b2b;
-}
-
-.logo-dark:hover path:nth-child(2) {
-    fill: white;
-}
-
-.logo-light:hover {
-    background-color: #2b2b2b;
-}
-
 .avatar {
     max-width: 160px;
     width: 100%;
-    margin: 0 auto 2rem;
+    margin: 0 auto;
     border-radius: 100%;
     display: block;
 }
-
-.img-placeholder {
-    padding-bottom: 55.56%;
-    position: relative;
-}
-
-.img-placeholder img {
-    position: absolute;
-    -webkit-transform: rotateZ(360deg)
-}
-
-.img-placeholder:hover img,
-.img-placeholder:hover {
-    opacity: .5
-}
-
-.intro-container footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-
-
-/* 
-
-Navigation & Footer
-
-*/
-
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 99;
-    display: flex;
-    padding: 0 1rem;
-    justify-content: space-between;
-}
-
-nav > div {
-    display: flex;
-    align-items: center;
-    flex: 0 0 auto;
-}
-
-nav h2 {
-    display: inline;
-    margin: 0;
-    width: auto;
-}
-
-nav > div:nth-child(2) a {
-    font-size: 60px;
-    font-weight: 100;
-    padding: 0 1rem;
-    margin-top: -15px;
-}
-
-nav a {
-    color: inherit;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-footer {
-    clear: both;
-    margin: 1em auto;
-    margin-bottom: 0;
-    margin-top: 4em;
-    padding: 1em;
-    width: 100%;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-size: 16px;
-}
-
-footer a {
-    padding: 0 .5em;
-    color: white
-}
-
-
-/* 
-
-General Layout Styles
-
-*/
-
 section {
     width: 100%;
-    padding: 1em;
+    padding: 3em 4em;
 }
-
-article {
-    margin: 0 0 1em;
-    position: relative;
-    border-radius: .25rem;
-    overflow: hidden;
-    padding: .5rem;
-}
-
-section:first-of-type {
-    padding-top: 5.5rem;
-}
-
-.home section:first-of-type {
-    padding: 2rem;
-}
-
-.project {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-    padding: 5rem 2rem;
-}
-
-.desktop {
-    flex: 1 1 500px;
-    max-width: 625px;
-    margin-bottom: 1rem;
-    padding: 1rem;
-}
-
-aside {
-    flex: 0 1 100%;
-}
-
-.square {
-    flex: 0 1 250px;
-}
-
-aside > div {
-    background-color: #B8E986;
-    border-radius: .25rem;
-    padding: .5rem;
-    margin-bottom: 1rem;
-    width: 100%;
-}
-
-aside > div p {
-    margin-bottom: 0;
-}
-
-aside > div span {
-    float: left;
-    padding: 0 1rem;
-    font-size: 150%;
-}
-
-.mobile {
-    flex: 1 1 auto;
-}
-
-.background-light {
-    background-color: #f8f5ef;
-    color: #333;
-    position: relative;
-}
-
-.drive-the-vote .project-intro {
-    float: left;
-    width: 100%;
-    padding-top: 9em;
-    padding-bottom: 2em;
-}
-
-.drive-the-vote .hero {
-    width: 100%;
-    padding-bottom: 70%;
-    background-image: url(../images/dtv/dtv-car.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    float: left;
-    background-position: center;
-}
-
-@media (min-width: 800px) {
-    .drive-the-vote .project-intro {
-        width: 50%;
-    }
-    .drive-the-vote .hero {
-        width: 50%;
-        padding-bottom: 78%;
-    }
-}
-
-@media (min-width: 900px) {
-    .drive-the-vote .hero {
-        padding-bottom: 68%;
-    }
-}
-
-@media (min-width: 1100px) {
-    .drive-the-vote .project-intro {
-        width: 40%;
-    }
-    .drive-the-vote .hero {
-        width: 60%;
-        padding-bottom: 50%;
-    }
-}
-
-@media (min-width: 1300px) {
-    .drive-the-vote .project-intro {
-        width: 40%;
-    }
-    .drive-the-vote .hero {
-        width: 60%;
-        padding-bottom: 40%;
-    }
-}
-
-@media (min-width: 1900px) {
-    body:not(.home) {
-        padding: 0 10%;
-    }
-    nav {
-        padding-left: 10%;
-        padding-right: 10%;
-    }
-}
-
-
-/*
-
-Project Specific Styles
-
-*/
-
-.deploy ul {
-    padding-bottom: 5rem;
-}
-
-.staples .project:first-of-type,
-.shiftgig .project:first-of-type,
-.drive-the-vote .project:first-of-type {
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-.drive-the-vote .desktop:first-of-type,
-.shiftgig .desktop:first-of-type {
-    max-width: 400px;
-    margin-bottom: -25px;
-}
-
-.deploy .desktop:first-of-type {
-    margin-bottom: -25px;
-}
-
-.the-goods .mobile {
-    padding: 1rem;
-    flex: 1 1 360px;
-}
-
-.drive-the-vote {
-    background-color: rgba(0, 80, 160, 1);
-    color: white;
-}
-
-.drive-the-vote nav {
-    background-color: rgba(0, 80, 160, .9);
-}
-
-.the-goods {
-    background-color: rgba(23, 123, 196, 1);
-    color: white;
-}
-
-.deploy {
-    background-color: rgba( 181, 141, 214, 1);
-}
-
-.shiftgig {
-    background-color: rgba(140, 204, 125, 1);
-    color: #333;
-}
-
-.staples {
-    color: white;
-    background-color: rgba(204, 0, 0, 1);
-}
-
-.the-goods nav {
-    color: white;
-    background-color: rgba(23, 123, 196, .9);
-}
-
-.shiftgig nav {
-    background-color: rgba(140, 204, 125, .9);
-}
-
-.deploy nav {
-    color: #333;
-    background-color: rgba( 181, 141, 214, .92);
-}
-
-.staples nav {
-    background-color: rgba(204, 0, 0, .9);
-}
-
 @media (min-width: 700px) {
-    article {
-        width: 50%;
-        float: left;
-    }
-    .mobile {
-        min-width: 300px;
-        max-width: 450px;
-    }
-    .the-goods .mobile {
-        max-width: 350px;
-    }
-    aside {
-        flex: 0 1 420px;
-    }
     section {
         max-width: 1200px;
         margin: 0 auto;
-        border-radius: .25rem
-    }
+   }
 }
-
 @media (min-width: 900px) {
     .intro-container {
-        width: 40%;
-        float: left;
+        width: 30%;
         height: 100%;
-        display: block;
         position: fixed;
         top: 0;
         bottom: 0;
-    }
+   }
     .intro {
         height: 100%;
-    }
-    .home section {
-        width: 60%;
+   }
+    section {
+        width: 70%;
         float: right;
-    }
-    .home section div {
-        max-width: 700px;
-    }
+   }
 }
-
-
-/* 
-
-This has CRAZY BAD CPU usage on Chrome, it looks fun but I need to find a way to  
-refactor this into something that isn't basically a battery benchmark test.
-
-*/
-
+/* This has CRAZY BAD CPU usage on Chrome, it looks fun but I need to find a way to refactor this into something that isn't basically a battery benchmark test. */
 @keyframes press-start {
     0% {
         background-position: 0 0;
-    }
+   }
     50% {
         background-position: calc(100% * 25) calc(100% * 5);
-    }
+   }
     100% {
         background-position: 0 0;
-    }
+   }
 }
-
 @media (min-width: 460px) {
     @keyframes press-start {
         50% {
             background-position: calc(100% * 8) calc(100% * 12);
-        }
-    }
+       }
+   }
 }
-
 @media (min-width: 600px) {
     @keyframes press-start {
         50% {
             background-position: calc(100% * 5) calc(100% * 10);
-        }
-    }
+       }
+   }
 }
-
 @media (min-width: 900px) {
     @keyframes press-start {
         50% {
             background-position: calc(100% * 10) calc(100% * 2);
-        }
-    }
+       }
+   }
 }
-
 @media (min-width: 1200px) {
     @keyframes press-start {
         50% {
             background-position: calc(100% * 5) calc(100% * 2);
-        }
-    }
+       }
+   }
 }
