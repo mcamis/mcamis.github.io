@@ -1,37 +1,35 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/mcamis/mcamis.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/mcamis/mcamis.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+                __                             ___            _aaaa
+               d8888aa,_                    a8888888a   __a88888888b
+              d8P   `Y88ba.                a8P'~~~~Y88a888P""~~~~Y88b
+             d8P      ~"Y88a____aaaaa_____a8P        888          Y88
+            d8P          ~Y88"8~~~~~~~88888P          88g          88
+           d8P                           88      ____ _88y__       88b
+           88                           a88    _a88~8888"8M88a_____888
+           88                           88P    88  a8"'     `888888888b_
+          a8P                           88     88 a88         88b     Y8,
+           8b                           88      8888P         388      88b
+          a88a                          Y8b       88L         8888.    88P
+         a8P                             Y8_     _888       _a8P 88   a88
+        _8P                               ~Y88a888~888g_   a888yg8'  a88'
+        88                                   ~~~~    ~""8888        a88P
+       d8'                                                Y8,      888L
+       8E                                                  88a___a8"888
+      d8P                                                   ~Y888"   88L
+      88                                                      ~~      88
+      88                                                              88
+      88                                                              88b
+  ____88a_.      a8a                                                __881
+88""P~888        888b                                 __          8888888888
+      888        888P                                d88b             88
+     _888ba       ~            aaaa.                 8888            d8P
+ a888~"Y88                    888888                 "8P          8aa888_
+        Y8b                   Y888P"                                88""888a
+        _88g8                  ~~~                                 a88    ~~
+    __a8"888_                                                  a_ a88
+   88"'    "88g                                                 "888g_
+   ~         `88a_                                            _a88'"Y88gg,
+                "888aa_.                                   _a88"'      ~88
+                   ~~""8888aaa______                ____a888P'
+                           ~~""""""888888888888888888""~~~
+                                      ~~~~~~~~~~~~
