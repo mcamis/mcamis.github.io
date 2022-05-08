@@ -223,9 +223,9 @@ header a {
 
 .content {
   position: relative;
-  padding: 40px 20px 20px;
+  padding: 30px 20px 20px;
 }
-.content:before {
+/* .content:before {
   content: " ";
   width: 100%;
   position: absolute;
@@ -235,7 +235,7 @@ header a {
   background-image: url("../images/horizontal.svg");
   image-rendering: pixelated;
   background-repeat: repeat-x;
-}
+} */
 
 .purple-block {
   position: absolute;
