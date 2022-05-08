@@ -15,7 +15,6 @@ jobs:
         with:
           directory: "../src"
           output: "../dist"
-          overwrite: true
       # Auto-commit to repository
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
