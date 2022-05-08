@@ -186,7 +186,13 @@ img {
   right: 10%;
   z-index: 2;
 }
-
+/* .vertical-bars {
+  background-image: url("../images/vertical-llines.svg");
+  width: 25%;
+  height: 50vh;
+  top: 0;
+  background-size: 225%; 
+}*/
 .memphis-purple {
   background-color: #dbb5dc;
   background-image: url("../images/memphis-pattern.svg");
@@ -219,6 +225,7 @@ div.squiggle:after {
   right: -20px;
   z-index: -1;
   opacity: 0.25;
+  mix-blend-mode: color-burn;
 }
 
 header p a {
