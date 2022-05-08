@@ -11,7 +11,7 @@ body {
   line-height: 1.5;
   color: #333;
   margin: 0 auto;
-  padding: 40px 5% 140px;
+  padding: 10px 5% 140px;
   width: 100%;
   background-image: url("../images/nnnoise.svg");
   background-color: #333;
@@ -36,7 +36,7 @@ body {
 
 @media screen and (min-width: 480px) {
   body {
-    padding: 40px 15% 0;
+    padding: 10px 15% 0;
   }
 }
 h1,
@@ -86,20 +86,18 @@ li span {
 section {
   width: 100%;
   max-width: 800px;
-  background-color: white;
   margin: 0 auto;
   margin-top: 40px;
   text-align: left;
   border-radius: 2px;
   position: relative;
-  box-shadow: 0 50px 100px -20px rgb(50 50 93 / 25%),
-    0 30px 60px -30px rgb(0 0 0 / 30%);
 }
 
 section header {
   background-color: #ffdc48;
   height: 128px;
   width: 100%;
+  max-width: 530px;
   padding: 24px;
   display: flex;
   flex-direction: row;
@@ -117,6 +115,10 @@ img {
 
 .content a {
   display: block;
+}
+
+.content h2 {
+  margin-bottom: 30px;
 }
 
 .content ul {
@@ -185,7 +187,7 @@ img {
   z-index: 2;
 }
 
-.pattern-container {
+.memphis-purple {
   background-color: #dbb5dc;
   background-image: url("../images/memphis-pattern.svg");
   background-size: contain;
@@ -193,29 +195,33 @@ img {
   height: 100vh;
   top: 248px;
 }
-/* div.pattern-container-sibling {
-  background-color: #66ce69;
-  position: absolute;
-  width: 25%;
-  height: 50vh;
-  top: 0;
-  z-index: -2;
-} */
 
 div.squiggle {
   position: fixed;
   content: " ";
   background-image: url("../images/squiggle.svg");
   background-repeat: no-repeat;
-  width: 600px;
-  height: 20px;
+  width: 900px;
+  height: 30px;
   bottom: 20px;
-  transform: scale(1.5);
-  right: 0;
+  right: -10px;
   z-index: 2;
 }
 
-header a {
+div.squiggle:after {
+  position: fixed;
+  content: " ";
+  background-image: url("../images/squiggle.svg");
+  background-repeat: no-repeat;
+  width: 900px;
+  height: 30px;
+  bottom: 15px;
+  right: -20px;
+  z-index: -1;
+  opacity: 0.25;
+}
+
+header p a {
   display: inline-block;
   font-size: 12px;
   margin-right: 5px;
@@ -224,17 +230,34 @@ header a {
 .content {
   position: relative;
   padding: 30px 20px 20px;
+  background-color: #fef8ff;
+  box-shadow: 0 50px 100px -20px rgb(50 50 93 / 12.5%),
+    0 30px 60px -30px rgb(0 0 0 / 15%);
+  border-left: 40px solid #4948ee;
+  margin-left: -40px;
 }
-/* .content:before {
+.content:before {
   content: " ";
-  width: 100%;
+  width: calc(100% + 40px);
   position: absolute;
-  height: 4px;
-  left: 0;
-  top: 0;
+  height: 8px;
+  left: -40px;
+  bottom: 0;
   background-image: url("../images/horizontal.svg");
   image-rendering: pixelated;
   background-repeat: repeat-x;
+}
+
+/* .content:after {
+  content: " ";
+  width: 128px;
+  height: 128px;
+  position: absolute;
+  left: -80px;
+  bottom: -60px;
+  background-color: #f7a80d;
+  border-radius: 100%;
+  z-index: -1;
 } */
 
 .purple-block {
@@ -246,7 +269,7 @@ header a {
   top: 100%;
   z-index: -1;
 }
-.right-lines-thick {
+.bw-lines {
   background-image: url(../images/right-lines-thick.svg);
   background-repeat: repeat-y;
   width: 8%;
@@ -255,7 +278,7 @@ header a {
   right: 0;
   background-size: auto 100px;
 }
-.lines-adjacement {
+.red-blue-block {
   background-color: #fe4539;
   background-image: url("../images/memphis-pattern.svg");
   content: " ";
