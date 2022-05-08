@@ -188,7 +188,6 @@ img {
 .pattern-container {
   background-color: #dbb5dc;
   background-image: url("../images/memphis-pattern.svg");
-  background-size: cover;
   background-size: contain;
   width: 25%;
   height: 100vh;
