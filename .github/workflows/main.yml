@@ -1,7 +1,7 @@
 name: Minify Workflow
 on:
   push:
-    branches: [ master ]
+    branches: [ gh-pages ]
 
 jobs:
   build:
@@ -21,6 +21,7 @@ jobs:
           # Directory that contains the minified files. Defaults to same directory
           # output: # optional, default is 
           output: '../'
+          overwrite: true
           # Descend at most levels (a non-negative integer) levels of directories below the starting-points.
           # maxdepth: # optional, default is 
           # Specifies which of the supported packages minifies JS files.
