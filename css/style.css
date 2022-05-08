@@ -235,7 +235,7 @@ header a {
 
 .content {
   position: relative;
-  padding: 60px 20px 20px;
+  padding: 40px 20px 20px;
 }
 .content:before {
   content: " ";
@@ -247,7 +247,6 @@ header a {
   background-image: url("../images/horizontal.svg");
   image-rendering: pixelated;
   background-repeat: repeat-x;
-  border-bottom: 36px solid #4948ee;
 }
 
 .purple-block {
