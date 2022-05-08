@@ -73,6 +73,7 @@ img {
   width: 100%;
   height: auto;
 }
+
 ul {
   list-style-type: none;
   padding-left: 0;
@@ -192,17 +193,17 @@ img {
   height: 100vh;
   top: 248px;
 }
-div.pattern-container-sibling {
-  background-color: #a88ad2;
+/* div.pattern-container-sibling {
+  background-color: #66ce69;
   position: absolute;
   width: 25%;
   height: 50vh;
   top: 0;
   z-index: -2;
-}
+} */
 
-.squiggle {
-  position: absolute;
+div.squiggle {
+  position: fixed;
   content: " ";
   background-image: url("../images/squiggle.svg");
   background-repeat: no-repeat;
@@ -210,21 +211,8 @@ div.pattern-container-sibling {
   height: 20px;
   bottom: 20px;
   transform: scale(1.5);
-  right: -200px;
+  right: 0;
   z-index: 2;
-}
-
-header:after {
-  content: " ";
-  position: absolute;
-  background-image: url("../images/header-overlay.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-
-  width: 280px;
-  height: 500px;
-  top: -146px;
-  right: -94px;
 }
 
 header a {
@@ -265,5 +253,16 @@ header a {
   height: 100%;
   top: 0;
   right: 0;
-  background-size: auto 40px;
+  background-size: auto 100px;
+}
+.lines-adjacement {
+  background-color: #fe4539;
+  background-image: url("../images/memphis-pattern.svg");
+  content: " ";
+  width: 280px;
+  height: 100vh;
+  top: 0;
+  right: 7.95%;
+  z-index: -1;
+  border-bottom: 50vh solid #557efe;
 }
