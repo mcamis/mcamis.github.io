@@ -11,13 +11,14 @@ jobs:
         with:
           ref: ${{ github.ref }}
       - name: Auto Minify
-        uses: nizarmah/auto-minify@v2.0
+        uses: nizarmah/auto-minify@v2.1
         with:
-          directory: "../src"
-          output: "../dist"
+          overwrite: true
+          directory: "./src"
+          output: "./dist"
       # Auto-commit to repository
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Minify source code
+      commit_message: "Github Action: Auto Minified JS and CSS files"
           branch: ${{ github.ref }}
