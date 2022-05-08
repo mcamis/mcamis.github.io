@@ -17,6 +17,9 @@ body {
   background-color: #333;
   position: relative;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (min-width: 480px) {
@@ -65,19 +68,24 @@ ul {
 
 header {
   margin-top: 40px;
-  background-color: #ffdc48;
   height: 128px;
-  width: 100%;
-  max-width: 530px;
-  padding: 24px;
+  width: calc(100% + 40px);
+  max-width: 800px;
+  border-radius: 2px 2px 0 0;
+  position: relative;
+  border-left: 40px solid transparent;
+  transform: translate(-20px, 0);
+}
+.background-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-radius: 2px 2px 0 0;
-  position: relative;
+  padding: 24px;
+  max-width: 530px;
+  background-color: #ffdc48;
 }
 
-header div {
+.text-wrapper {
   overflow: hidden;
   margin-left: 20px;
   display: flex;
@@ -107,7 +115,6 @@ header code {
 section {
   width: calc(100% + 40px);
   max-width: 800px;
-  margin: 0 auto;
   border-radius: 0 0 2px 2px;
   position: relative;
   padding: 30px 20px 20px;
@@ -115,7 +122,7 @@ section {
   box-shadow: 0 50px 100px -20px rgb(50 50 93 / 12.5%),
     0 30px 60px -30px rgb(0 0 0 / 15%);
   border-left: 40px solid #4948ee;
-  margin-left: -40px;
+  transform: translate(-20px, 0);
 }
 
 @media screen and (min-width: 760px) {
