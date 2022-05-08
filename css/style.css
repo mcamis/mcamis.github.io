@@ -19,7 +19,7 @@ body {
   position: relative;
   overflow-x: hidden;
 }
-body:after {
+/* body:after {
   content: " ";
   width: 100%;
   position: fixed;
@@ -32,7 +32,7 @@ body:after {
   background-position: left 100%;
   background-size: 100px 70px;
   z-index: 99;
-}
+} */
 
 @media screen and (min-width: 480px) {
   body {
@@ -113,9 +113,7 @@ img {
   display: block;
   margin-right: 20px;
 }
-.content {
-  padding: 20px 20px;
-}
+
 .content a {
   display: block;
 }
@@ -185,6 +183,7 @@ img {
   right: 10%;
   z-index: 2;
 }
+
 .pattern-container {
   background-color: #dbb5dc;
   background-image: url("../images/memphis-pattern.svg");
@@ -192,6 +191,14 @@ img {
   width: 25%;
   height: 100vh;
   top: 248px;
+}
+div.pattern-container-sibling {
+  background-color: #a88ad2;
+  position: absolute;
+  width: 25%;
+  height: 50vh;
+  top: 0;
+  z-index: -2;
 }
 
 .squiggle {
@@ -201,7 +208,7 @@ img {
   background-repeat: no-repeat;
   width: 600px;
   height: 20px;
-  bottom: -50px;
+  bottom: 20px;
   transform: scale(1.5);
   right: -200px;
   z-index: 2;
@@ -226,6 +233,23 @@ header a {
   margin-right: 5px;
 }
 
+.content {
+  position: relative;
+  padding: 60px 20px 20px;
+}
+.content:before {
+  content: " ";
+  width: 100%;
+  position: absolute;
+  height: 4px;
+  left: 0;
+  top: 0;
+  background-image: url("../images/horizontal.svg");
+  image-rendering: pixelated;
+  background-repeat: repeat-x;
+  border-bottom: 36px solid #4948ee;
+}
+
 .purple-block {
   position: absolute;
   background-color: #a88ad2;
@@ -234,4 +258,13 @@ header a {
   height: 100vh;
   top: 100%;
   z-index: -1;
+}
+.right-lines-thick {
+  background-image: url(../images/right-lines-thick.svg);
+  background-repeat: repeat-y;
+  width: 8%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-size: auto 40px;
 }
