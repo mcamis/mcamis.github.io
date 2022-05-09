@@ -65,7 +65,6 @@ ul {
 
 header {
   margin-top: 40px;
-  height: 128px;
   width: calc(100% + 40px);
   max-width: 800px;
   border-radius: 2px 2px 0 0;
