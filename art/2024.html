@@ -254,9 +254,8 @@
     });
 
     function updateLightboxImage(isPrerender) {
-      console.log({ pendingRender });
       if (pendingCleanup || pendingRender) return;
-      if(!isPrerender) pendingRender = true;
+      if (!isPrerender) pendingRender = true;
       const img = images[currentIndex];
       lightboxImage.src = img.dataset.fullUrl;
 
@@ -270,7 +269,6 @@
       );
     }
 
-    // Close Lightbox with Escape Key or Close Button
     const closeButton = document.getElementById("lightbox-close");
     closeButton.addEventListener("click", closeLightbox);
     document.addEventListener("keydown", (e) => {
