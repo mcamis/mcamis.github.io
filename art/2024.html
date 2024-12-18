@@ -10,7 +10,7 @@
   <body class="art">
     <header>
       <div class="background-wrapper">
-        <a href="../images/selfie.jpeg" target="_blank"
+        <a href="../index.html"
           ><img
             src="../images/IMG_2769.jpg"
             title='"I print this not because I am proud of my own picture, but because most people like to see the man with whom they are doing business."'
@@ -32,8 +32,14 @@
         </div>
       </div>
     </header>
+    <!-- <nav>
+      <ul>
+        <li><a href="../index.html">Index</a></li>
+        <li><a href="../index.html" class="active">Art</a></li>
+      </ul>
+    </nav> -->
     <section>
-      <pre><a href="../index.html">TOP</a> / ART / 2024 - Getting started with oil painting</pre>
+      <h2>2024 - Getting started with oil painting</h2>
       <p>
         2024 was the year I started oil painting, though my first attempt took
         place during a workshop with
@@ -49,17 +55,18 @@
         League.
       </p>
       <p>
-        Initially I painted exclusively from life, but I started working on more master
-        studies/sketches later in the year and it had a profound impact on my approach, particularly with
-        color. I'm also started working from photo references, mostly in an attempt to
-        maximize the quantity of work I'm doing.
+        Initially I painted exclusively from life, but I started working on more
+        master studies/sketches later in the year and it had a profound impact
+        on my approach, particularly with color. I also started working from
+        photo references, mostly in an attempt to maximize the quantity of work
+        I'm doing.
       </p>
     </section>
 
     <div class="gallery">
       <div class="gallery-item">
         <img
-          src="./images/2024/2024_11_1.jpeg"
+          src="./images/2024/2024_11_1 Medium.jpeg"
           data-full-url="./images/2024/2024_11_1.jpeg"
           alt=""
         />
@@ -175,69 +182,106 @@
   </body>
 
   <script>
+    // JavaScript
     const images = document.querySelectorAll(".gallery-item img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImage = lightbox.querySelector("img");
     const prevButton = lightbox.querySelector(".prev");
     const nextButton = lightbox.querySelector(".next");
+    let cachedTransform = "";
     let currentIndex = 0;
 
     // Open Lightbox
     images.forEach((img, index) => {
       img.addEventListener("click", () => {
-        currentIndex = index; // Set the current image index
-        updateLightboxImage(); // Display the current image in the lightbox
-        lightbox.classList.add("visible"); // Show the lightbox
+        currentIndex = index;
+        updateLightboxImage();
       });
     });
 
     // Close Lightbox on Click
     lightbox.addEventListener("click", (e) => {
       if (e.target === lightbox) {
-        lightbox.classList.remove("visible"); // Close lightbox
+        closeLightbox();
       }
     });
 
     // Navigate to the Previous Image
     prevButton.addEventListener("click", (e) => {
-      e.stopPropagation(); // Prevent click from closing lightbox
+      e.stopPropagation();
       currentIndex = (currentIndex - 1 + images.length) % images.length;
       updateLightboxImage();
     });
 
     // Navigate to the Next Image
     nextButton.addEventListener("click", (e) => {
-      e.stopPropagation(); // Prevent click from closing lightbox
+      e.stopPropagation();
       currentIndex = (currentIndex + 1) % images.length;
       updateLightboxImage();
     });
 
     // Update Lightbox Image
     function updateLightboxImage() {
-      lightboxImage.src = images[currentIndex].dataset.fullUrl;
-      lightboxImage.alt = images[currentIndex].alt;
+      const img = images[currentIndex];
+      lightboxImage.src = img.src;
+      const rect = img.getBoundingClientRect();
+
+      // Calculate initial translate and scale values
+      const scaleX = rect.width / lightboxImage.width;
+      const scaleY = rect.height / lightboxImage.height;
+      const translateX = rect.left + rect.width / 2 - window.innerWidth / 2;
+      const translateY = rect.top + rect.height / 2 - window.innerHeight / 2;
+
+      // Update CSS variables
+      cachedTransform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+      document.documentElement.style.setProperty(
+        "--lightbox-transform",
+        cachedTransform
+      );
+
+      lightbox.classList.add("visible");
+
+      // Animate to full-screen size
+      window.setTimeout(() => {
+        document.documentElement.style.setProperty(
+          "--lightbox-transition",
+          "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)"
+        );
+        lightboxImage.classList.add("open");
+      }, 250);
     }
 
+    // Close Lightbox with Escape Key or Close Button
+    const closeButton = document.getElementById("lightbox-close");
+    closeButton.addEventListener("click", closeLightbox);
     document.addEventListener("keydown", (e) => {
-      if (!lightbox.classList.contains("visible")) return; // Exit if lightbox is not open
-
+      if (!lightbox.classList.contains("visible")) return;
+      if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowRight") {
-        currentIndex = (currentIndex + 1) % images.length; // Next image
+        currentIndex = (currentIndex + 1) % images.length;
         updateLightboxImage();
       } else if (e.key === "ArrowLeft") {
-        currentIndex = (currentIndex - 1 + images.length) % images.length; // Previous image
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
         updateLightboxImage();
-      } else if (e.key === "Escape") {
-        lightbox.classList.remove("visible"); // Close lightbox on Escape key
       }
     });
 
-    const closeButton = document.getElementById("lightbox-close");
+    function closeLightbox() {
+      lightboxImage.classList.remove("open");
 
-    // Close Lightbox on Close Button Click
-    closeButton.addEventListener("click", (e) => {
-      e.stopPropagation(); // Prevent click bubbling
-      lightbox.classList.remove("visible");
-    });
+      setTimeout(() => {
+        lightbox.classList.remove("visible");
+        setTimeout(() => {
+          window.requestAnimationFrame(() => {
+            lightboxImage.removeAttribute("style");
+            lightboxImage.src = "";
+            document.documentElement.style.setProperty(
+              "--lightbox-transition",
+              "none"
+            );
+          });
+        }, 300);
+      }, 300);
+    }
   </script>
 </html>
