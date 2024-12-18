@@ -273,6 +273,7 @@ div.squiggle:after {
   padding: 100px;
   background: white;
   max-width: 1800px;
+  width: 100%;
 }
 
 /* Gallery Item */
