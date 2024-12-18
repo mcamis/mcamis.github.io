@@ -182,6 +182,8 @@
   </body>
 
   <script>
+    // CSS (include in your stylesheet)
+
     // JavaScript
     const images = document.querySelectorAll(".gallery-item img");
     const lightbox = document.getElementById("lightbox");
@@ -190,6 +192,39 @@
     const nextButton = lightbox.querySelector(".next");
     let cachedTransform = "";
     let currentIndex = 0;
+
+    function getCurrentStyle(img) {
+      // IntersectionObserver for measuring DOM changes
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          updateImageTransform(entry);
+        }
+        // observer.disconnect();
+      });
+
+      observer.observe(img);
+    }
+
+    function updateImageTransform(element) {
+      const rect = element.boundingClientRect;
+      const scaleX = rect.width / lightboxImage.width;
+      const scaleY = rect.height / lightboxImage.height;
+      const translateX = rect.left + rect.width / 2 - window.innerWidth / 2;
+      const translateY = rect.top + rect.height / 2 - window.innerHeight / 2;
+
+      cachedTransform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+      document.documentElement.style.setProperty(
+        "--lightbox-transform",
+        cachedTransform
+      );
+      setTimeout(() => {
+        document.documentElement.style.setProperty(
+          "--lightbox-transition",
+          "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)"
+        );
+        lightboxImage.classList.add("open");
+      }, 300);
+    }
 
     // Open Lightbox
     images.forEach((img, index) => {
@@ -224,31 +259,27 @@
     function updateLightboxImage() {
       const img = images[currentIndex];
       lightboxImage.src = img.dataset.fullUrl;
-      const rect = img.getBoundingClientRect();
 
-      // Calculate initial translate and scale values
-      const scaleX = rect.width / lightboxImage.width;
-      const scaleY = rect.height / lightboxImage.height;
-      const translateX = rect.left + rect.width / 2 - window.innerWidth / 2;
-      const translateY = rect.top + rect.height / 2 - window.innerHeight / 2;
+      // });
 
-      // Update CSS variables
-      cachedTransform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
-      document.documentElement.style.setProperty(
-        "--lightbox-transform",
-        cachedTransform
-      );
+      setTimeout(() => {
+        lightbox.classList.add("visible");
+        getCurrentStyle(img);
+      }, 300);
 
-      lightbox.classList.add("visible");
-
-      // Animate to full-screen size
-      window.setTimeout(() => {
-        document.documentElement.style.setProperty(
-          "--lightbox-transition",
-          "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)"
-        );
-        lightboxImage.classList.add("open");
-      }, 250);
+      // setTimeout(() => {
+      //   document.documentElement.style.setProperty(
+      //     "--lightbox-transform",
+      //     cachedTransform
+      //   );
+      // });
+      // setTimeout(() => {
+      //   // document.documentElement.style.setProperty(
+      //   //       "--lightbox-transition",
+      //   //       "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)"
+      //   //     );
+      //   // lightboxImage.classList.add("open");
+      // }, 300);
     }
 
     // Close Lightbox with Escape Key or Close Button
@@ -273,18 +304,22 @@
         lightbox.classList.remove("visible");
         setTimeout(() => {
           window.requestAnimationFrame(() => {
-            lightboxImage.removeAttribute("style");
+            cachedTransform = "";
             lightboxImage.src = "";
+            lightboxImage.removeAttribute("style");
+            document.documentElement.style.setProperty(
+              "--lightbox-transform",
+              ""
+            );
             document.documentElement.style.setProperty(
               "--lightbox-transition",
-              "none"
+              ""
             );
           });
         }, 300);
       }, 300);
     }
 
-    // Preload images from data-full-url
     document.addEventListener("DOMContentLoaded", () => {
       const images = document.querySelectorAll(".gallery-item img");
 
