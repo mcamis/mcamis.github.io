@@ -182,104 +182,92 @@
   </body>
 
   <script>
-    // CSS (include in your stylesheet)
-
-    // JavaScript
     const images = document.querySelectorAll(".gallery-item img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImage = lightbox.querySelector("img");
     const prevButton = lightbox.querySelector(".prev");
     const nextButton = lightbox.querySelector(".next");
-    let cachedTransform = "";
+    let pendingCleanup = false;
+    let pendingRender = false;
     let currentIndex = 0;
 
-    function getCurrentStyle(img) {
-      // IntersectionObserver for measuring DOM changes
+    function getCurrentStyle(img, isPrerender) {
       const observer = new IntersectionObserver((entries) => {
         for (const entry of entries) {
-          updateImageTransform(entry);
+          updateImageTransform(entry, isPrerender);
         }
-        // observer.disconnect();
+        observer.disconnect();
       });
 
       observer.observe(img);
     }
 
-    function updateImageTransform(element) {
+    function updateImageTransform(element, isPrerender) {
       const rect = element.boundingClientRect;
       const scaleX = rect.width / lightboxImage.width;
       const scaleY = rect.height / lightboxImage.height;
       const translateX = rect.left + rect.width / 2 - window.innerWidth / 2;
       const translateY = rect.top + rect.height / 2 - window.innerHeight / 2;
 
-      cachedTransform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
       document.documentElement.style.setProperty(
         "--lightbox-transform",
-        cachedTransform
+        `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`
       );
+      if (isPrerender) return;
       setTimeout(() => {
         document.documentElement.style.setProperty(
           "--lightbox-transition",
           "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)"
         );
         lightboxImage.classList.add("open");
+        pendingRender = false;
       }, 300);
     }
 
-    // Open Lightbox
     images.forEach((img, index) => {
       img.addEventListener("click", () => {
         currentIndex = index;
         updateLightboxImage();
       });
+      img.addEventListener("mouseenter", () => {
+        currentIndex = index;
+        updateLightboxImage(true);
+      });
     });
 
-    // Close Lightbox on Click
     lightbox.addEventListener("click", (e) => {
       if (e.target === lightbox) {
         closeLightbox();
       }
     });
 
-    // Navigate to the Previous Image
     prevButton.addEventListener("click", (e) => {
       e.stopPropagation();
       currentIndex = (currentIndex - 1 + images.length) % images.length;
       updateLightboxImage();
     });
 
-    // Navigate to the Next Image
     nextButton.addEventListener("click", (e) => {
       e.stopPropagation();
       currentIndex = (currentIndex + 1) % images.length;
       updateLightboxImage();
     });
 
-    // Update Lightbox Image
-    function updateLightboxImage() {
+    function updateLightboxImage(isPrerender) {
+      console.log({ pendingRender });
+      if (pendingCleanup || pendingRender) return;
+      if(!isPrerender) pendingRender = true;
       const img = images[currentIndex];
       lightboxImage.src = img.dataset.fullUrl;
 
-      // });
-
-      setTimeout(() => {
-        lightbox.classList.add("visible");
-        getCurrentStyle(img);
-      }, 300);
-
-      // setTimeout(() => {
-      //   document.documentElement.style.setProperty(
-      //     "--lightbox-transform",
-      //     cachedTransform
-      //   );
-      // });
-      // setTimeout(() => {
-      //   // document.documentElement.style.setProperty(
-      //   //       "--lightbox-transition",
-      //   //       "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)"
-      //   //     );
-      //   // lightboxImage.classList.add("open");
-      // }, 300);
+      // setTimeout to give the browser some to render the new image
+      setTimeout(
+        () => {
+          !isPrerender && lightbox.classList.add("visible");
+          getCurrentStyle(img, isPrerender);
+        },
+        isPrerender ? 100 : 50
+      );
     }
 
     // Close Lightbox with Escape Key or Close Button
@@ -298,25 +286,24 @@
     });
 
     function closeLightbox() {
+      if (pendingCleanup) return;
+      pendingCleanup = true;
       lightboxImage.classList.remove("open");
 
       setTimeout(() => {
         lightbox.classList.remove("visible");
         setTimeout(() => {
-          window.requestAnimationFrame(() => {
-            cachedTransform = "";
-            lightboxImage.src = "";
-            lightboxImage.removeAttribute("style");
-            document.documentElement.style.setProperty(
-              "--lightbox-transform",
-              ""
-            );
-            document.documentElement.style.setProperty(
-              "--lightbox-transition",
-              ""
-            );
-          });
-        }, 300);
+          document.documentElement.style.setProperty(
+            "--lightbox-transform",
+            ""
+          );
+          document.documentElement.style.setProperty(
+            "--lightbox-transition",
+            ""
+          );
+          lightboxImage.src = "";
+          pendingCleanup = false;
+        }, 400);
       }, 300);
     }
 
